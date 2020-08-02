@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: 'buildo'
+  name: api
+  labels:
+    app: api
+spec:
+  selector:
+    matchLabels:
+      name: api
+  template:
+    metadata:
+      labels:
+        version: v1
+        name: api
+        app: api
+    spec:
+      containers:
+        - name: api
+          image: ludusrusso/confildo:latest
+          imagePullPolicy: Always
+          envFrom:
+            - secretRef:
+                name: db
+          resources:
+            limits:
+              memory: '64Mi'
+              cpu: '100m'
+            requests:
+              memory: '64Mi'
+              cpu: '50m'
+          ports:
+            - containerPort: 3000
+              name: 'http'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api
+  namespace: 'buildo'
+spec:
+  type: NodePort
+  selector:
+    name: api
+  ports:
+    - port: 80
+      targetPort: http
+      name: http
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  namespace: 'buildo'
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: 'letsencrypt-prod'
+  name: api
+spec:
+  rules:
+    - host: api.buildo.k8s.ludusrusso.space
+      http:
+        paths:
+          - backend:
+              serviceName: api
+              servicePort: 80
+  tls:
+    - hosts:
+        - api.buildo.k8s.ludusrusso.space
+      secretName: api.buildo.k8s.ludusrusso.space

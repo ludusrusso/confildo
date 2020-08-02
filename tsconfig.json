@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "declaration": true,
+    "target": "es5",
+    "noImplicitAny": true,
+    "experimentalDecorators": true,
+    "strictNullChecks": true
+  },
+  "include": ["src"],
+  "exclude": ["**/*.spec.ts"]
+}
