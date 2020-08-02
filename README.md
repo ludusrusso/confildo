@@ -77,11 +77,11 @@ You can access the api at [https://api.buildo.k8s.ludusrusso.space](https://api.
 
 ## TO DO
 
-### Improve testcontainers postgres readiness check
+### Improve testcontainers postgres readiness check
 
 At the moment, I do not wait for the database container to be fully initialized before starting tests. On my local machines, this seems not a problem and tests runs correctly, but this may produce (I'm not sure 100%) test fails on different hardware.
 
-### Authentication and Authorization
+### Authentication and Authorization
 
 The server is not authenticated. It could be nice to improve it with a layer of Authentication and Authorization, maybe based on jwt.
 
