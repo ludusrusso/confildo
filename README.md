@@ -91,7 +91,8 @@ To improve deployment and future development, a pipeline for CI/CD is needed.
 
 ## How to contribute to this project?
 
-1. For this project on github!
-2. Install locally and ensure tests passes (see instruction above)
+1. Fork this project on github!
+2. Install locally and ensure all tests pass (see instruction above)
 3. Add your improvements (please ensure also to add tests)
-4. Submit a pull request
+4. Ensure all tests still passes after your improvements!
+5. Submit a pull request
